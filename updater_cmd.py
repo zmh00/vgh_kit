@@ -49,14 +49,15 @@ class Updater_github():
                     self.download_url = asset['browser_download_url']
                     self.target_fullname = asset['name']
                     break
+            return True
         except:
-            return None
+            return False
         
     
     def is_latest(self):
         if self.version_tag_latest == None:
             res = self.get_info()
-            if res == None:
+            if res == False:
                 print("Failed to retrieve latest information!") 
                 return True
         if self.version_tag < self.version_tag_latest: # check whether the local program is the latest with string comparison in python
