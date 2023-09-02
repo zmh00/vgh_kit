@@ -32,27 +32,33 @@ class Updater_github():
         """
         Get version_tag_latest, target_fullname, download_url
         """
-        latest_url = f"https://api.github.com/repos/{self.owner}/{self.repo}/releases/latest"
-        with urllib.request.urlopen(latest_url) as response:
-            res = json.loads(response.read().decode())
+        try:
+            latest_url = f"https://api.github.com/repos/{self.owner}/{self.repo}/releases/latest"
+            with urllib.request.urlopen(latest_url) as response:
+                res = json.loads(response.read().decode())
 
-            if 'tag_name' in res:
-                self.version_tag_latest = res['tag_name']
-                latest_assets = res['assets']
-            else:
-                print("Failed to retrieve latest version")
-                sys.exit('Failed to retrieve latest version')
+                if 'tag_name' in res:
+                    self.version_tag_latest = res['tag_name']
+                    latest_assets = res['assets']
+                else:
+                    print("Failed to retrieve latest version")
+                    sys.exit('Failed to retrieve latest version')
 
-        for asset in latest_assets:
-            if self.target_name.upper() in asset['name'].upper(): # insensitive name match
-                self.download_url = asset['browser_download_url']
-                self.target_fullname = asset['name']
-                break
+            for asset in latest_assets:
+                if self.target_name.upper() in asset['name'].upper(): # insensitive name match
+                    self.download_url = asset['browser_download_url']
+                    self.target_fullname = asset['name']
+                    break
+        except:
+            return None
         
     
     def is_latest(self):
         if self.version_tag_latest == None:
-            self.get_info()
+            res = self.get_info()
+            if res == None:
+                print("Failed to retrieve latest information!") 
+                return True
         if self.version_tag < self.version_tag_latest: # check whether the local program is the latest with string comparison in python
             print("Not the latest version!")
             return False
