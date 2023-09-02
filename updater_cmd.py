@@ -5,7 +5,6 @@ import sys
 
 class Updater_github():
     """
-    flet為多線程程序，流程為初始化確認是否最新+設定參數 => 啟動flet介面 => 非同步啟動下載 => 下載完執行+關閉flet
     """
     def __init__(self, owner:str, repo:str, target_name:str, version_tag:str) -> None:
         self.owner = owner # github owner
