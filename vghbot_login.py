@@ -329,7 +329,7 @@ class Client:
             'signOnID': login_id,
             'signOnPassword': login_psw
         }
-        r = self.session.post(tURL, data=login_payload)
+        r = self.session.post(tURL, data=login_payload, verify=False)
         if r.status_code == 200:
             print("SCHEDULER: Login succeeded!")
             self.login_id = login_id
