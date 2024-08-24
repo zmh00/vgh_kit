@@ -324,7 +324,7 @@ class Client:
                 login_id = self.login_id
                 login_psw = self.login_psw
         
-        tURL = "http://10.97.235.122/Exm/HISLogin/CheckUserByID"
+        tURL = "https://10.97.235.122/Exm/HISLogin/CheckUserByID"
         login_payload = {
             'signOnID': login_id,
             'signOnPassword': login_psw
