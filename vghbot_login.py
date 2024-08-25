@@ -324,12 +324,12 @@ class Client:
                 login_id = self.login_id
                 login_psw = self.login_psw
         
-        tURL = "https://10.97.235.122/Exm/HISLogin/CheckUserByID"
+        tURL = "https://cks.vghtpe.gov.tw/Exm/HISLogin/CheckUserByID"
         login_payload = {
             'signOnID': login_id,
             'signOnPassword': login_psw
         }
-        r = self.session.post(tURL, data=login_payload, verify=False)
+        r = self.session.post(tURL, data=login_payload)
         if r.status_code == 200:
             print("SCHEDULER: Login succeeded!")
             self.login_id = login_id
