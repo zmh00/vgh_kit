@@ -61,7 +61,7 @@ class Client:
 
         if match:
             redirect_url = match.group(1)
-            print(f"Auth_token URL found: {redirect_url}")
+            print(f"登入成功\nAuth_token URL: {redirect_url}")
             url = baseURL+redirect_url
             r3 = self.session.get(url=url)  
         else:
