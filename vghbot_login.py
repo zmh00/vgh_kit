@@ -63,7 +63,10 @@ class Client:
             redirect_url = match.group(1)
             print(f"登入成功\nAuth_token URL: {redirect_url}")
             url = baseURL+redirect_url
-            r3 = self.session.get(url=url)  
+            r3 = self.session.get(url=url)
+            self.login_id = login_id
+            self.login_psw = login_psw
+            return True  
         else:
             print("登入失敗")
             return self.eip_login_requests()
